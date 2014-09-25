@@ -94,9 +94,9 @@ class PrettyExceptions extends \Slim\Middleware
                 array("<div>#", "</div>\n"),
                 $exception->getTraceAsString() . "\n"
             );
-        $html = sprintf("<h1>%s</h1>", $title);
-        $html .= "<p>The application could not run because of the following error:</p>";
-        $html .= "<h2>Details</h2>";
+        $html = sprintf("<h1>%s</h1>\n", $title);
+        $html .= "<p>The application could not run because of the following error:</p>\n";
+        $html .= "\n<h2>Details</h2>\n";
         $html .= sprintf("<div><strong>Type:</strong> %s</div>", get_class($exception));
         if ($code) {
             $html .= sprintf("<div><strong>Code:</strong> %s</div>\n", $code);
@@ -111,8 +111,8 @@ class PrettyExceptions extends \Slim\Middleware
             $html .= sprintf("<div><strong>Line:</strong> %s</div>\n", $line);
         }
         if ($trace) {
-            $html .= "<h2>Trace</h2>\n";
-            $html .= sprintf("%s\n", $trace);
+            $html .= "\n<h2>Trace</h2>\n";
+            $html .= $trace;
         }
 
         return sprintf("<!DOCTYPE html><html>\n<head>\n<title>%s</title>\n<style>body{margin:0;padding:30px;font:12px/1.5 Helvetica,Arial,Verdana,sans-serif;}h1{margin:0;font-size:48px;font-weight:normal;line-height:48px;}strong{display:inline-block;width:65px;}</style>\n</head>\n<body>\n\n%s\n\n</body>\n</html>", $title, $html);
